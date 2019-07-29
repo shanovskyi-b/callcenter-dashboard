@@ -39,8 +39,8 @@ export class Agent implements IAgent {
   private updateTimers() {
     const now = new Date();
     
-    this.timeInStatus = now.getUTCSeconds() - this.statusChangeDate.getUTCSeconds();
-    this.timeLoggedIn = now.getUTCSeconds() - this.creationDate.getUTCSeconds();
+    this.timeInStatus = Math.round((Date.now() - <any> this.statusChangeDate) / 1000);
+    this.timeLoggedIn = Math.round((Date.now() - <any> this.creationDate) / 1000);
   }
 
 }

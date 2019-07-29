@@ -1,0 +1,22 @@
+<div class="calls">
+  <p class="calls__stats">Total amount of calls: {{callsService.calls.length}}</p>
+  <p class="calls__stats">Completed: {{getCompletedNumber()}}</p>
+
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>Caller number</th>
+      <th>Calling number</th>
+      <th>Time in status</th>
+    </tr>
+    <tr *ngFor="let call of (callsService.calls | callsSort)" 
+      class="call" 
+      [ngClass]="'call--' + call.status"
+    >
+      <td>{{call.type}}</td>
+      <td>{{call.callerNumber}}</td>
+      <td>{{call.callingNumber}}</td>
+      <td>{{call.timeInStatus}}</td>
+    </tr>
+  </table>
+</div>

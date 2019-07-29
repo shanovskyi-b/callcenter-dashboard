@@ -1,0 +1,13 @@
+.call {
+  &.call--WAITING {
+    background-color: red;
+  }
+
+  &.call--ACTIVE {
+    background-color: blue;
+  }
+
+  &.call--COMPLETED {
+    background-color: grey;
+  }
+}

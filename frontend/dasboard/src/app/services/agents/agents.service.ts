@@ -12,7 +12,7 @@ export class AgentsService {
 
   constructor(private callcenterDataService: CallcenterDataService) { 
     callcenterDataService.getData()
-      .subscribe(({ agents }: { agents: IAgent }) => {
+      .subscribe(({ agents }: { agents: IAgent[] }) => {
         this.updateAgents(agents);
       })
   }
