@@ -1,0 +1,20 @@
+<table class="agents">
+  <tr>
+    <th>Name</th>
+    <th>Number</th>
+    <th>Status</th>
+    <th>Time in status</th>
+    <th>Total time logged in</th>
+    <th>Total calls</th>
+    <th>Effective calls</th>
+  </tr>
+  <tr *ngFor="let agent of agents">
+    <td>{{agent.name}}</td>
+    <td>{{agent.number}}</td>
+    <td>{{agent.status}}</td>
+    <td>{{agent.timeInStatus}}</td>
+    <td>{{agent.timeLoggedIn}}</td>
+    <td>{{agent.callsNumber}}</td>
+    <td>{{agent.effectiveCallsNumber}}</td>
+  </tr>
+</table>

@@ -6,10 +6,11 @@ import { webSocket } from "rxjs/webSocket";
   providedIn: 'root'
 })
 export class CallcenterDataService {
+  private ws: Observable<any>  = webSocket("ws://localhost:8080");
 
   constructor() { }
 
   getData(): Observable<any> {
-    return webSocket("ws://localhost:8080");
+    return this.ws;
   }
 }
