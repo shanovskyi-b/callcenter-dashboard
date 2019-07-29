@@ -8,11 +8,13 @@ import { Call } from '../../models/call/call';
   templateUrl: './calls.component.html',
   styleUrls: ['./calls.component.scss']
 })
+
 export class CallsComponent implements OnInit {
   constructor(private callsService: CallsService) { 
   }
 
   ngOnInit() {
+    
   }
 
   getCompletedNumber() {
