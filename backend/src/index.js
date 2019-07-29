@@ -1,11 +1,16 @@
 const WebSocket = require('ws');
  
-const ws = new WebSocket.Server({ port: 8080 });
- 
-ws.on('open', function open() {
-  ws.send('something');
+const wss = new WebSocket.Server({ port: 8080 });
+
+require('./call-center-data-generator')
+  .subscribe(data => {
+    wss.clients.forEach(function each(client) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify(data));
+      }
+    });
+  });
+
+
+wss.on('connection', function open() {
 });
- 
-ws.on('message', function incoming(data) {
-  console.log(data);
-})
