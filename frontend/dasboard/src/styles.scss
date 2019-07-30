@@ -27,6 +27,7 @@ $border-color:#888;
 
   &.widget-table__cell--header {
     font-size: 1.2em;
+    text-transform: capitalize;
     background-color: #ddf;
     border-bottom: none;
   }

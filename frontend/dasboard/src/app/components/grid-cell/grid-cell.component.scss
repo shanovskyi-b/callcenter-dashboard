@@ -7,7 +7,7 @@ $main-color: #88f;
 .grid-cell {
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background: #ccf;
 }
 
 .grid-cell__wrapper {
@@ -20,6 +20,7 @@ $main-color: #88f;
   
   background-color: #fff;
   border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 
   &:hover {
     .grid-cell__resizer {

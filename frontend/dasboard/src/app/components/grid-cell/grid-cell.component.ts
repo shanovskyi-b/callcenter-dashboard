@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { Cell, CELL_SIZE, Point } from '../../models/cell/cell';
+import { Cell } from '../../models/cell/cell';
 
 @Component({
   selector: 'app-grid-cell',
@@ -14,5 +14,4 @@ export class GridCellComponent {
   }
 
   constructor() { }
-
 }

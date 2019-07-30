@@ -1,6 +1,7 @@
 export type Point = {x: number, y: number};
 
 export const CELL_SIZE = 100;
+export const CELL_GAP = 20;
 
 export class Cell {
   name: string;
@@ -22,18 +23,20 @@ export class Cell {
     this.startPosition = {
       ...this.position
     };
+
+    this.isMoving = true;
   }
 
   onPositionChange(offset: Point) {
-    this.position.x = Math.max(
-      this.startPosition.x + Math.round(offset.x / CELL_SIZE)
-    , 0)
+    const x = Math.max(
+      this.startPosition.x + Math.round(offset.x / (CELL_SIZE + CELL_GAP))
+    , 0);
+    const y = Math.max(
+      this.startPosition.y + Math.round(offset.y / (CELL_SIZE + CELL_GAP))
+    , 0);
 
-    this.position.y = Math.max(
-      this.startPosition.y + Math.round(offset.y / CELL_SIZE)
-    , 0)
-
-    this.isMoving = true;
+    if (x !== this.position.x) this.position.x = x;
+    if (y !== this.position.y) this.position.y = y;
   }
 
   onPositionChangeEnd() {
@@ -50,11 +53,11 @@ export class Cell {
 
   onSizeChange(offset: Point) {
     this.width = Math.max(
-      this.startSize.width + Math.round(offset.x / CELL_SIZE)
+      this.startSize.width + Math.round(offset.x / (CELL_SIZE + CELL_GAP))
     , 1)
 
     this.height = Math.max(
-      this.startSize.height + Math.round(offset.y / CELL_SIZE)
+      this.startSize.height + Math.round(offset.y / (CELL_SIZE + CELL_GAP))
     , 1)
   }
 }

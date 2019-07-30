@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Input, Output, HostListener, ElementRef } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
+import { auditTime } from 'rxjs/operators';
 
 
 @Directive({
@@ -59,16 +59,13 @@ export class DraggerDirective {
     }
     
     this.mouseUpSubscription = fromEvent(document, 'mouseup')
-      .pipe(
-        throttleTime(100)
-      )
       .subscribe(() => {
         this.dragEnd();
       });
     
     this.mouseMoveSubscription = fromEvent(document, 'mousemove')
       .pipe(
-        throttleTime(100)
+        auditTime(100)
       )
       .subscribe((event) => {
         this.dragging(event);
