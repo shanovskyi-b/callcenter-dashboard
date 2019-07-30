@@ -1,20 +1,29 @@
-<table class="agents">
-  <tr>
-    <th>Name</th>
-    <th>Number</th>
-    <th>Status</th>
-    <th>Time in status</th>
-    <th>Total time logged in</th>
-    <th>Total calls</th>
-    <th>Effective calls</th>
-  </tr>
-  <tr *ngFor="let agent of agents">
-    <td>{{agent.name}}</td>
-    <td>{{agent.number}}</td>
-    <td>{{agent.status}}</td>
-    <td>{{agent.timeInStatus}}</td>
-    <td>{{agent.timeLoggedIn}}</td>
-    <td>{{agent.callsNumber}}</td>
-    <td>{{agent.effectiveCallsNumber}}</td>
-  </tr>
-</table>
+<div class="agents">
+  <table class="widget-table">
+    <tr class="widget-table__row widget-table__row--header">
+      <th class="widget-table__cell widget-table__cell--header">Name</th>
+      <th class="widget-table__cell widget-table__cell--header">Number</th>
+      <th class="widget-table__cell widget-table__cell--header">Status</th>
+      <th class="widget-table__cell widget-table__cell--header">Time in status</th>
+      <th class="widget-table__cell widget-table__cell--header">Total time logged in</th>
+      <th class="widget-table__cell widget-table__cell--header">Total calls</th>
+      <th class="widget-table__cell widget-table__cell--header">Effective calls</th>
+    </tr>
+  </table>
+  
+  <div class="scrollable-wrapper">
+    <table class="widget-table">
+      <tr class="widget-table__row" *ngFor="let agent of agents">
+        <td class="widget-table__cell">{{agent.name}}</td>
+        <td class="widget-table__cell">{{agent.number}}</td>
+        <td class="widget-table__cell">{{agent.status}}</td>
+        <td class="widget-table__cell">{{agent.timeInStatus}}</td>
+        <td class="widget-table__cell">{{agent.timeLoggedIn}}</td>
+        <td class="widget-table__cell">{{agent.callsNumber}}</td>
+        <td class="widget-table__cell">{{agent.effectiveCallsNumber}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+  
+

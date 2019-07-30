@@ -44,8 +44,8 @@ export class GridComponent {
       'grid-template-areas': gridAreas
         .map(row => '"' + row.join(' ') + '"')
         .join(' '),
-      'width': width * CELL_SIZE + 'px',
-      'height': height * CELL_SIZE + 'px',
+      // 'width': width * CELL_SIZE + 'px',
+      // 'height': height * CELL_SIZE + 'px',
       'grid-auto-rows': CELL_SIZE + 'px',
       'grid-auto-columns': CELL_SIZE + 'px',
     };

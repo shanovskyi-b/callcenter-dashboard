@@ -2,13 +2,12 @@
   <div class="grid-cell__header" appDragger (onPositionChange)="onPositionChange($event)">
     <p class="grid-cell__title">{{cell.name}}</p>
   </div>
-  
-  <ng-content></ng-content>
+  <div class="grid-cell__content">
+      <ng-content></ng-content>
+  </div>
   
   <div class="grid-cell__resizer"
     appDragger 
-    (onPositionChange)="onSizeChange2($event)"
-  >
-    Resize me
-  </div>
+    (onPositionChange)="onSizeChange($event)"
+  ></div>
 </div>

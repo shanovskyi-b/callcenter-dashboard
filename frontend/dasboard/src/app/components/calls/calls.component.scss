@@ -1,13 +1,25 @@
+.calls {
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.calls__header {
+  padding: 5px 10px;
+}
+
+.calls__stats {
+  margin: 0;
+  font-size: 20px;
+}
+
 .call {
   &.call--WAITING {
-    background-color: red;
+    background-color: #f44;
   }
 
   &.call--ACTIVE {
-    background-color: blue;
-  }
-
-  &.call--COMPLETED {
-    background-color: grey;
+    background-color: #66f;
   }
 }
