@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
-import { Cell } from '../../models/cell/cell';
+import { Cell, CELL_SIZE } from '../../models/cell/cell';
 
 @Component({
   selector: 'app-grid-cell',
@@ -16,6 +16,23 @@ export class GridCellComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onSizeChange({ width, height }) {
+    width = this.calculateNewSize(width);
+    height = this.calculateNewSize(height);
+    
+    if (width !== this.cell.width && width > 0) {
+      this.cell.width = width;
+    }
+
+    if (height !== this.cell.height && height > 0) {
+      this.cell.height = height;
+    }
+  }
+
+  private calculateNewSize(size) {
+    return Math.floor(size / CELL_SIZE) + Math.round((size % CELL_SIZE) / CELL_SIZE);;
   }
 
 }

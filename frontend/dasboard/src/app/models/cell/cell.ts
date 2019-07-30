@@ -1,5 +1,7 @@
 type Point = {x: number, y: number};
 
+export const CELL_SIZE = 40;
+
 export class Cell {
   name: string;
   position: Point;
