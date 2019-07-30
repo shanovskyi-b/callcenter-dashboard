@@ -1,18 +1,16 @@
 <div class="agents">
-  <table class="widget-table">
-    <tr class="widget-table__row widget-table__row--header">
-      <th class="widget-table__cell widget-table__cell--header">Name</th>
-      <th class="widget-table__cell widget-table__cell--header">Number</th>
-      <th class="widget-table__cell widget-table__cell--header">Status</th>
-      <th class="widget-table__cell widget-table__cell--header">Time in status</th>
-      <th class="widget-table__cell widget-table__cell--header">Total time logged in</th>
-      <th class="widget-table__cell widget-table__cell--header">Total calls</th>
-      <th class="widget-table__cell widget-table__cell--header">Effective calls</th>
-    </tr>
-  </table>
-  
   <div class="scrollable-wrapper">
     <table class="widget-table">
+      <tr class="widget-table__row widget-table__row--header">
+        <th class="widget-table__cell widget-table__cell--header">Name</th>
+        <th class="widget-table__cell widget-table__cell--header">Number</th>
+        <th class="widget-table__cell widget-table__cell--header">Status</th>
+        <th class="widget-table__cell widget-table__cell--header">Time in status</th>
+        <th class="widget-table__cell widget-table__cell--header">Total time logged in</th>
+        <th class="widget-table__cell widget-table__cell--header">Total calls</th>
+        <th class="widget-table__cell widget-table__cell--header">Effective calls</th>
+      </tr>
+
       <tr class="widget-table__row" *ngFor="let agent of agents">
         <td class="widget-table__cell">{{agent.name}}</td>
         <td class="widget-table__cell">{{agent.number}}</td>
@@ -25,5 +23,7 @@
     </table>
   </div>
 </div>
+
+
   
 

@@ -2,9 +2,9 @@
   <div class="grid-cell__wrapper" #wrapper>
     <div class="grid-cell__header" 
       appDragger 
-      (onPositionChange)="onPositionChange($event)"
-      (onDragStart)="onPositionChangeStart($event)"
-      (onDragEnd)="onPositionChangeEnd()"
+      (onPositionChange)="cell.onPositionChange($event)"
+      (onDragStart)="cell.onPositionChangeStart($event)"
+      (onDragEnd)="cell.onPositionChangeEnd()"
       [grabElement]="wrapper"
     >
       <p class="grid-cell__title">{{cell.name}}</p>
@@ -15,8 +15,8 @@
     
     <div class="grid-cell__resizer"
       appDragger 
-      (onPositionChange)="onSizeChange($event)"
-      (onDragStart)="onSizeChangeStart($event)"
+      (onPositionChange)="cell.onSizeChange($event)"
+      (onDragStart)="cell.onSizeChangeStart($event)"
     ></div>
   </div>
   

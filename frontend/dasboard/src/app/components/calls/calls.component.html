@@ -3,18 +3,14 @@
     <p class="calls__stats">Total amount of calls: {{callsService.calls.length}}</p>
     <p class="calls__stats">Completed: {{getCompletedNumber()}}</p>
   </div>
-
-  <table class="widget-table">
-    <tr class="widget-table__row">
-      <th class="widget-table__cell widget-table__cell--header">Type</th>
-      <th class="widget-table__cell widget-table__cell--header">Caller number</th>
-      <th class="widget-table__cell widget-table__cell--header">Calling number</th>
-      <th class="widget-table__cell widget-table__cell--header">Time in status</th>
-    </tr>
-  </table>
-  
   <div class="scrollable-wrapper">
     <table class="widget-table">
+      <tr class="widget-table__row">
+        <th class="widget-table__cell widget-table__cell--header">Type</th>
+        <th class="widget-table__cell widget-table__cell--header">Caller number</th>
+        <th class="widget-table__cell widget-table__cell--header">Calling number</th>
+        <th class="widget-table__cell widget-table__cell--header">Time in status</th>
+      </tr>
       <tr class="widget-table__row" *ngFor="let call of (callsService.calls | callsSort)" 
         class="call" 
         [ngClass]="'call--' + call.status"
@@ -26,5 +22,4 @@
       </tr>
     </table>
   </div>
-  
 </div>

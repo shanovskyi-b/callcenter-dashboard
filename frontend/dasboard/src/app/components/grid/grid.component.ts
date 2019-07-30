@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Cell, CELL_SIZE } from '../../models/cell/cell';
-
-type Point = { x: number, y: number };
-type Size = { width: number, height: number };
+import { Cell, CELL_SIZE, Point } from '../../models/cell/cell';
 
 @Component({
   selector: 'app-grid',
@@ -18,6 +15,20 @@ export class GridComponent {
   getStyles() {
     this.fixOverlaps();
 
+    const gridAreas = this.getGridAreas();
+
+    return {
+      'grid-template-areas': gridAreas
+        .map(row => '"' + row.join(' ') + '"')
+        .join(' '),
+      'grid-auto-rows': CELL_SIZE + 'px',
+      'grid-auto-columns': CELL_SIZE + 'px',
+    };
+  }
+
+  private getGridAreas (): string[][] { 
+    let gridAreas: string[][] = [];
+
     const { width, height } = this.cells.reduce((size, cell) => {
       return {
         width: Math.max(size.width, cell.position.x + cell.width),
@@ -25,7 +36,7 @@ export class GridComponent {
       }
     }, {width: 0, height: 0});
     
-    let gridAreas: string[][] = [];
+    
     for(let i = 0; i < height; i++) {
       const row = new Array(width).fill('.')
       
@@ -40,13 +51,7 @@ export class GridComponent {
       }
     });
 
-    return {
-      'grid-template-areas': gridAreas
-        .map(row => '"' + row.join(' ') + '"')
-        .join(' '),
-      'grid-auto-rows': CELL_SIZE + 'px',
-      'grid-auto-columns': CELL_SIZE + 'px',
-    };
+    return gridAreas;
   }
 
   private fixOverlaps() {
@@ -71,8 +76,6 @@ export class GridComponent {
       }
     }
 
-    // fixWhiteSpaces();
-
     function fixCell(cell) {
       const leftCornerUsedPoint = usedPoints[pointToKey(cell.position.x, cell.position.y)];
       if (leftCornerUsedPoint) {
@@ -82,39 +85,6 @@ export class GridComponent {
       for (let i = cell.position.y; i < cell.position.y + cell.height; i++) {
         if (usedPoints[pointToKey(cell.position.x, i)]) {
           cell.position.y = usedPoints[pointToKey(cell.position.x, i)].y;
-        }
-      }
-    }
-
-    function fixWhiteSpaces() {
-      for (let cell of sortedCells) {
-        let isTopWhiteSpaceExist = true;
-        while (isTopWhiteSpaceExist && cell.position.y > 0) {
-          for (let i = cell.position.x; i < cell.position.x + cell.width; i++) {
-            if (usedPoints[pointToKey(i, cell.position.y - 1)]) {
-              isTopWhiteSpaceExist = false;
-              break;
-            }
-          }
-
-          if (isTopWhiteSpaceExist) {
-            cell.position.y--;
-          }
-          
-        }
-
-        let isLeftWhiteSpaceExist = true;
-        while (isLeftWhiteSpaceExist && cell.position.x > 0) {
-          for (let i = cell.position.y; i < cell.position.y + cell.height; i++) {
-            if (usedPoints[pointToKey(cell.position.x - 1, i)]) {
-              isLeftWhiteSpaceExist = false;
-              break;
-            }
-          }
-
-          if (isLeftWhiteSpaceExist) {
-            cell.position.x--;
-          }
         }
       }
     }

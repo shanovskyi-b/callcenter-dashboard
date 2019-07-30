@@ -1,4 +1,4 @@
-import { ICall, CallStatus, CallType } from './call.interface';
+import { ICall, CallStatus } from './call.interface';
 
 export class Call implements ICall {
   type;
