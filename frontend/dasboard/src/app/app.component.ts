@@ -8,9 +8,9 @@ import { Cell } from './models/cell/cell';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  widget1: Cell = new Cell('first', { x: 0, y: 0}, 1, 2);
-  widget2: Cell = new Cell('second', { x: 1, y: 0}, 2, 2);
-  widget3: Cell = new Cell('third', { x: 1, y: 2}, 2, 1);
+  widget1: Cell = new Cell('first', { x: 0, y: 0}, 6, 4);
+  widget2: Cell = new Cell('second', { x: 0, y: 4}, 4, 3);
+  widget3: Cell = new Cell('third', { x: 6, y: 0}, 4, 2);
 
   agentsWidget: Cell = new Cell('Agents', { x: 0, y: 0}, 7, 4);
   callsWidget: Cell = new Cell('Calls', { x: 0, y: 4}, 7, 4);

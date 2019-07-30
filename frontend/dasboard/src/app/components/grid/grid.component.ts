@@ -44,8 +44,6 @@ export class GridComponent {
       'grid-template-areas': gridAreas
         .map(row => '"' + row.join(' ') + '"')
         .join(' '),
-      // 'width': width * CELL_SIZE + 'px',
-      // 'height': height * CELL_SIZE + 'px',
       'grid-auto-rows': CELL_SIZE + 'px',
       'grid-auto-columns': CELL_SIZE + 'px',
     };
@@ -128,9 +126,10 @@ export class GridComponent {
 
   private getSortedCells() {
     return this.cells.sort((a, b) => (
-      a.position.x - b.position.x
+      (a.isMoving ? -1 : 0)
+      || (b.isMoving ? 1 : 0)
+      || a.position.x - b.position.x
       || a.position.y - b.position.y
-      || b.postionUpdateDate - a.postionUpdateDate
     ));
   }
 }

@@ -1,4 +1,4 @@
-type Point = {x: number, y: number};
+export type Point = {x: number, y: number};
 
 export const CELL_SIZE = 100;
 
@@ -7,7 +7,7 @@ export class Cell {
   position: Point;
   width: number;
   height: number;
-  postionUpdateDate;
+  isMoving: boolean = false;
 
   constructor(name: string, position: Point, width: number, height: number) {
     this.name = name;

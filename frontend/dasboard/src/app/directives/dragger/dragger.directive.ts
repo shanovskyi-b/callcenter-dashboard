@@ -8,12 +8,15 @@ import { throttleTime } from 'rxjs/operators';
 })
 export class DraggerDirective {
   @Output() onPositionChange = new EventEmitter<{ x: number, y: number }>();
+  @Output() onDragStart = new EventEmitter<{ x: number, y: number }>();
+  @Output() onDragEnd = new EventEmitter();
+  @Input() grabElement: HTMLElement;
 
   private startPoint: { 
     x: number, 
     y: number
   };
-  private startPointOffset: { 
+  private grabElementStartOffset : { 
     top: number, 
     left: number
   };
@@ -24,18 +27,43 @@ export class DraggerDirective {
 
   @HostListener('mousedown', ['$event'])
   dragStart(event) {
-    console.log('event', event)
+    if(event.stopPropagation) event.stopPropagation();
+    if(event.preventDefault) event.preventDefault();
+    event.cancelBubble = true;
+    event.returnValue = false;
+
+    if (this.onDragStart) this.onDragStart.emit(this.startPoint);
+
     this.startPoint = {
       x: event.clientX,
       y: event.clientY
     };
-    this.startPointOffset = getOffsetRect(this.elRef.nativeElement);
+    
+    if (this.grabElement) {
+      const rect = this.grabElement.getBoundingClientRect();
+      
+      this.grabElementStartOffset = {
+        left: rect.left,
+        top: rect.top,
+      };
+
+      this.grabElement.setAttribute('style', `
+        width: ${this.grabElement.offsetWidth}px;
+        height: ${this.grabElement.offsetHeight}px;
+        position: fixed;
+        left: ${this.grabElementStartOffset.left}px;
+        top: ${this.grabElementStartOffset.top}px;
+        transition: left .2s, top .2s;
+        z-index: 1;
+      `);
+    }
+    
     this.mouseUpSubscription = fromEvent(document, 'mouseup')
       .pipe(
         throttleTime(100)
       )
-      .subscribe((event) => {
-        this.dragEnd(event);
+      .subscribe(() => {
+        this.dragEnd();
       });
     
     this.mouseMoveSubscription = fromEvent(document, 'mousemove')
@@ -45,16 +73,17 @@ export class DraggerDirective {
       .subscribe((event) => {
         this.dragging(event);
       });
-
-    if(event.stopPropagation) event.stopPropagation();
-    if(event.preventDefault) event.preventDefault();
-    event.cancelBubble = true;
-    event.returnValue = false;
   };
 
-  dragEnd(event) {
+  dragEnd() {
     this.mouseUpSubscription.unsubscribe();
     this.mouseMoveSubscription.unsubscribe();
+    
+    if (this.onDragEnd) this.onDragEnd.emit();
+    
+    if (this.grabElement) {
+      this.grabElement.setAttribute('style', '');
+    }
   };
 
   dragging(event) {
@@ -63,32 +92,14 @@ export class DraggerDirective {
       y: event.clientY - this.startPoint.y
     };
 
-    const elementOffset = getOffsetRect(this.elRef.nativeElement);
-    console.log('element offset', this.startPointOffset.top, elementOffset.top, elementOffset.top - this.startPointOffset.top)
-    
+    if (this.grabElement) {
+      this.grabElement.style.left = mouseOffset.x + this.grabElementStartOffset.left + 'px',
+      this.grabElement.style.top = mouseOffset.y + this.grabElementStartOffset.top + 'px'
+    }
+
     this.onPositionChange.emit({
-      x: mouseOffset.x - (elementOffset.left - this.startPointOffset.left),
-      y: mouseOffset.y - (elementOffset.top - this.startPointOffset.top),
+      x: mouseOffset.x,
+      y: mouseOffset.y
     });
-
-    // this.onPositionChange.emit(mouseOffset);
   };
-}
-
-function getOffsetRect(element) : { top: number, left: number } {
-  const box = element.getBoundingClientRect();
-  
-  const body = document.body;
-  const docElem = document.documentElement;
-  
-  const scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
-  const scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
-  
-  const clientTop = docElem.clientTop || body.clientTop || 0;
-  const clientLeft = docElem.clientLeft || body.clientLeft || 0;
-  
-  const top  = box.top +  scrollTop - clientTop;
-  const left = box.left + scrollLeft - clientLeft;
-  
-  return { top: Math.round(top), left: Math.round(left) };
 }

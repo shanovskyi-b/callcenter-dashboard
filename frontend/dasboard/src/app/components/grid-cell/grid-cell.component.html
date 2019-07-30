@@ -1,13 +1,23 @@
 <div class="grid-cell">
-  <div class="grid-cell__header" appDragger (onPositionChange)="onPositionChange($event)">
-    <p class="grid-cell__title">{{cell.name}}</p>
-  </div>
-  <div class="grid-cell__content">
-      <ng-content></ng-content>
+  <div class="grid-cell__wrapper" #wrapper>
+    <div class="grid-cell__header" 
+      appDragger 
+      (onPositionChange)="onPositionChange($event)"
+      (onDragStart)="onPositionChangeStart($event)"
+      (onDragEnd)="onPositionChangeEnd()"
+      [grabElement]="wrapper"
+    >
+      <p class="grid-cell__title">{{cell.name}}</p>
+    </div>
+    <div class="grid-cell__content">
+        <ng-content></ng-content>
+    </div>
+    
+    <div class="grid-cell__resizer"
+      appDragger 
+      (onPositionChange)="onSizeChange($event)"
+      (onDragStart)="onSizeChangeStart($event)"
+    ></div>
   </div>
   
-  <div class="grid-cell__resizer"
-    appDragger 
-    (onPositionChange)="onSizeChange($event)"
-  ></div>
 </div>

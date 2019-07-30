@@ -12,9 +12,7 @@ export class NotificationService {
   }
 
   showNotification(title: string) {
-    console.log('try')
     if ('Notification' in window && Notification.permission === "granted") {
-      console.log('eee', title)
       const n = new Notification(title);
     }
   }
