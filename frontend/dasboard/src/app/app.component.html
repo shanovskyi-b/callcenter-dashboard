@@ -1,3 +1,9 @@
-<!-- <app-agents></app-agents> -->
+<app-agents></app-agents>
 
 <app-calls></app-calls>
+
+<app-grid [cells]="[widget1, widget2, widget3]">
+  <app-grid-cell [cell]="widget1" class="w1">{{widget1.name}}</app-grid-cell>
+  <app-grid-cell [cell]="widget2" class="w2">{{widget2.name}}</app-grid-cell>
+  <app-grid-cell [cell]="widget3" class="w3">{{widget3.name}}</app-grid-cell>
+</app-grid>
