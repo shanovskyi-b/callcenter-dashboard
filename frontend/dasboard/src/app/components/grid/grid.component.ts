@@ -46,6 +46,8 @@ export class GridComponent {
         .join(' '),
       'width': width * CELL_SIZE + 'px',
       'height': height * CELL_SIZE + 'px',
+      'grid-auto-rows': CELL_SIZE + 'px',
+      'grid-auto-columns': CELL_SIZE + 'px',
     };
   }
 
@@ -71,7 +73,7 @@ export class GridComponent {
       }
     }
 
-    fixWhiteSpaces();
+    // fixWhiteSpaces();
 
     function fixCell(cell) {
       const leftCornerUsedPoint = usedPoints[pointToKey(cell.position.x, cell.position.y)];
@@ -128,6 +130,7 @@ export class GridComponent {
     return this.cells.sort((a, b) => (
       a.position.x - b.position.x
       || a.position.y - b.position.y
+      || b.postionUpdateDate - a.postionUpdateDate
     ));
   }
 }

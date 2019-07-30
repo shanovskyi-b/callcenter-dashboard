@@ -7,7 +7,7 @@ import { CallsComponent } from './components/calls/calls.component';
 import { CallsSortPipe } from './components/calls/calls-sort.pipe';
 import { GridComponent } from './components/grid/grid.component';
 import { GridCellComponent } from './components/grid-cell/grid-cell.component';
-import { ResizerComponent } from './components/resizer/resizer.component';
+import { DraggerDirective } from './directives/dragger/dragger.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { ResizerComponent } from './components/resizer/resizer.component';
     CallsSortPipe,
     GridComponent,
     GridCellComponent,
-    ResizerComponent,
+    DraggerDirective,
   ],
   imports: [
     BrowserModule
